@@ -1,11 +1,7 @@
 class Hero
-  def initialize(x, y, dir)
-    @x_coordinate = x
-    @y_coordinate = y
-    @dir = dir
-  end
+  attr_accessor :position
 
-  def position
-    {x: @x_coordinate, y: @y_coordinate, dir: @dir}
+  def initialize(x, y, dir)
+    @position = {x: x, y: y, dir: dir}
   end
 end
