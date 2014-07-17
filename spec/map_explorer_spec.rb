@@ -13,4 +13,15 @@ describe MapExplorer do
       expect(hero.position).to eq({x: 1, y: 0, dir: "S"})
     end
   end
+
+  describe "destination" do
+    it "shows the current position of hero after all moves are made" do
+      hero = Hero.new(1, 1, "N")
+      map = Map.new(5, 5)
+      map_explorer = MapExplorer.new(map, hero)
+      moves = ["L", "R", "M"]
+      map_explorer.explore(moves)
+      expect(map_explorer.destination).to eq "1 0 S"
+    end
+  end
 end

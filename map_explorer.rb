@@ -9,4 +9,8 @@ class MapExplorer
       @hero.position = @map.move(move, @hero.position)
     end
   end
+
+  def destination
+    @hero.position.values.join(" ")
+  end
 end
