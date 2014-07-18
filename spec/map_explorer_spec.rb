@@ -10,7 +10,7 @@ describe MapExplorer do
       map_explorer = MapExplorer.new(map, hero)
       moves = ["L", "R", "M"]
       map_explorer.explore(moves)
-      expect(hero.position).to eq({x: 1, y: 0, dir: "S"})
+      expect(hero.position).to eq({x: 1, y: 2, dir: "N"})
     end
   end
 
@@ -21,7 +21,7 @@ describe MapExplorer do
       map_explorer = MapExplorer.new(map, hero)
       moves = ["L", "R", "M"]
       map_explorer.explore(moves)
-      expect(map_explorer.destination).to eq "1 0 S"
+      expect(map_explorer.destination).to eq "1 2 N"
     end
   end
 end
