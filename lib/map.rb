@@ -2,8 +2,8 @@ require 'matrix'
 
 class Map
 
-  LEFT_TURN = {"N" => "W", "S" => "E", "E" => "N", "W" =>"N"}
-  RIGHT_TURN = {"N" => "E", "S" => "W", "E" => "S", "W" =>"S"}
+  LEFT_TURN = {"N" => "W", "S" => "E", "E" => "N", "W" =>"S"}
+  RIGHT_TURN = {"N" => "E", "S" => "W", "E" => "S", "W" =>"N"}
   NEXT_STEP = {"N" => :step_ahead, "S" =>:step_behind, "E" => :step_right, "W" => :step_left}
   STEP_SIZE = 1
 
