@@ -1,46 +1,33 @@
 require 'matrix'
+require_relative "./direction_north.rb"
+require_relative "./direction_south.rb"
+require_relative "./direction_west.rb"
+require_relative "./direction_east.rb"
+
 
 class Map
-
-  LEFT_TURN = {"N" => "W", "S" => "E", "E" => "N", "W" =>"S"}
-  RIGHT_TURN = {"N" => "E", "S" => "W", "E" => "S", "W" =>"N"}
-  NEXT_STEP = {"N" => :step_ahead, "S" =>:step_behind, "E" => :step_right, "W" => :step_left}
-  STEP_SIZE = 1
 
   def initialize(x,y)
     @map = Matrix.build(x,y) {0}
   end
 
-  def move(move, position)
-    case move
-    when "L"
-      position.merge(dir: LEFT_TURN[position[:dir]])
-    when "R"
-      position.merge(dir: RIGHT_TURN[position[:dir]])
-    when "M"
-      send(NEXT_STEP[position[:dir]], position)
-    end
+  def next_position(position)
+    new_position(position)
   end
 
   private
 
-  def step_ahead(position)
-    position[:y] += STEP_SIZE
-    position
-  end
-
-  def step_behind(position)
-    position[:y] -= STEP_SIZE
-    position
-  end
-
-  def step_left(position)
-    position[:x] -= STEP_SIZE
-    position
-  end
-
-  def step_right(position)
-    position[:x] += STEP_SIZE
-    position
+  def new_position(position)
+      x, y, dir = position.values
+    case dir
+    when DirectionNorth.instance
+      position.merge(y: y + 1)
+    when DirectionSouth.instance
+      position.merge(y: y - 1)
+    when DirectionEast.instance
+      position.merge(x: x + 1)
+    when DirectionWest.instance
+      position.merge(x: x - 1)
+    end
   end
 end

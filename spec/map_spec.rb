@@ -1,49 +1,30 @@
 require_relative "../lib/map.rb"
+require_relative "../lib/direction_north.rb"
+require_relative "../lib/direction_south.rb"
+require_relative "../lib/direction_west.rb"
+require_relative "../lib/direction_east.rb"
 
 describe Map do
-  describe "move" do
-    context "hero is facing north at (1,1) and turning" do
-      let(:position) { {x: 1, y: 1, dir: "N"} }
-
-      it "updates the position to west if the next move if left" do
-        map = Map.new(5,5)
-        expect(map.move("L", position)).to eq ({x: 1, y: 1, dir: "W" })
-      end
-
-      it "updates the position to west if the next move if right" do
-        map = Map.new(5,5)
-        expect(map.move("R", position)).to eq ({x: 1, y: 1, dir: "E" })
-      end
-
-
+  describe "position" do
+    let(:position) { {x: 1, y: 2} }
+    it "increases x coordinate by 1 if hero is facing east" do
+      map = Map.new(5,5)
+      expect(map.next_position(position.merge(dir: DirectionEast.instance))).to eq ({x: 2, y: 2, dir: DirectionEast.instance })
     end
 
-    context "hero is at (1,1) and stepping " do
-      let(:position) { {x: 1, y: 1} }
-
-      it "increments y coordinate by 1 if hero is facing north" do
-        position[:dir] = "N"
-        map = Map.new(5,5)
-        expect(map.move("M", position)).to eq ({x: 1, y: 2, dir: "N" })
-      end
-
-       it "decrements y coordinate by 1 if hero is facing south" do
-        position[:dir] = "S"
-        map = Map.new(5,5)
-        expect(map.move("M", position)).to eq ({x: 1, y: 0, dir: "S" })
-      end
-
-       it "increments x coordinate by 1 if hero is facing east" do
-        position[:dir] = "E"
-        map = Map.new(5,5)
-        expect(map.move("M", position)).to eq ({x: 2, y: 1, dir: "E" })
-      end
-
-       it "increments y coordinate by 1 if hero is facing north" do
-        position[:dir] = "W"
-        map = Map.new(5,5)
-        expect(map.move("M", position)).to eq ({x: 0, y: 1, dir: "W" })
-      end
+    it "decreases x coordinate by 1 if hero is facing west" do
+      map = Map.new(5,5)
+      expect(map.next_position(position.merge(dir: DirectionWest.instance))).to eq ({x: 0, y: 2, dir: DirectionWest.instance })
     end
-  end
+
+    it "increases y coordinate by 1 if hero is facing north" do
+     map = Map.new(5,5)
+     expect(map.next_position(position.merge(dir: DirectionNorth.instance))).to eq ({x: 1, y: 3, dir: DirectionNorth.instance })
+   end
+
+   it "decreases y coordinate by 1 if hero is facing south" do
+     map = Map.new(5,5)
+     expect(map.next_position(position.merge(dir: DirectionSouth.instance))).to eq ({x: 1, y: 1, dir: DirectionSouth.instance })
+   end
+ end
 end

@@ -6,11 +6,12 @@ class MapExplorer
 
   def explore(moves)
     moves.each do |move|
-      @hero.position = @map.move(move, @hero.position)
+      @hero.move(move, @map)
     end
   end
 
   def destination
-    @hero.position.values.join(" ")
+    position = @hero.position
+    [position[:x], position[:y], position[:dir].key].join(" ")
   end
 end

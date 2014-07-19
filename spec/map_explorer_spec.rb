@@ -1,6 +1,8 @@
 require_relative "../map_explorer.rb"
 require_relative "../lib/hero.rb"
 require_relative "../lib/map.rb"
+require_relative "../lib/direction_north.rb"
+require_relative "../lib/direction_west.rb"
 
 describe MapExplorer do
   describe "explore" do
@@ -10,7 +12,7 @@ describe MapExplorer do
       map_explorer = MapExplorer.new(map, hero)
       moves = ["L", "R", "M"]
       map_explorer.explore(moves)
-      expect(hero.position).to eq({x: 1, y: 2, dir: "N"})
+      expect(hero.position).to eq({x: 1, y: 2, dir: DirectionNorth.instance})
     end
   end
 
